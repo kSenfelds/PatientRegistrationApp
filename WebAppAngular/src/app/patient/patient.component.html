@@ -1,0 +1,30 @@
+<div class="filter-section">
+    <label class="filter-label">Filter by Doctor:</label>
+    <select [(ngModel)]="selectedDoctorId" class="filter-select" (ngModelChange)="onDoctorSelectionChange()">
+      <option value="">All Doctors</option>
+      <option *ngFor="let doctor of doctorData" [value]="doctor.id">{{ doctor.name }}</option>
+    </select>
+  </div>
+
+
+<ul class="card-list">
+    <li *ngFor="let patient of patientData" class="card-item">
+        <h1 class = "card-header">{{patient.name}} {{patient.lastName}}</h1>
+        <label class="card-label">Address: {{patient.address}}</label>
+        <label class="card-label">Phone: {{patient.phoneNumber}}</label>
+        
+        <label class="card-label">Doctor:
+            <ng-container *ngIf="patient.doctorId == null; else hasDoctor">None</ng-container>
+            <ng-template #hasDoctor>{{getDoctorById(patient.doctorId!)?.lastName}} {{getDoctorById(patient.doctorId!)?.specialization}}</ng-template>
+          </label>
+        <div class = "card-select">
+        <label class="card-label">Select Doctor</label>
+        <select placeholder = "Select Doctor" class="card-label" [(ngModel)]="patient.doctor">
+            <option  *ngFor="let doctor of doctorData" [ngValue]="doctor">{{doctor.lastName}} {{doctor.specialization}}</option>
+        
+        </select></div>
+
+        <button class="primary" type="button" (click)="editData(patient, patient.doctor!)">Edit Doctor</button>
+        
+    </li>
+</ul>
