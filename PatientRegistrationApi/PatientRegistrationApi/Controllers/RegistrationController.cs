@@ -8,7 +8,7 @@ namespace PatientRegistrationApi.Controllers
     [ApiController]
     public class RegistrationController : BaseController
     {
-        public RegistrationController(IEntityService<Doctor> doctorService, IEntityService<Patient> patientService) : base(doctorService, patientService)
+        public RegistrationController(IDoctorService doctorService, IPatientService patientService) : base(doctorService, patientService)
         {
         }
 
@@ -29,7 +29,7 @@ namespace PatientRegistrationApi.Controllers
         [HttpGet("GetPatientByDoctor")]
         public IActionResult GetPatientByDoctor(int doctorId)
         {
-            var doctor = _doctorService.GetById(doctorId);
+            var doctor = _doctorService.GetDoctorWithPatients(doctorId);
             return Ok(doctor.Patients);
         }
 
@@ -50,7 +50,7 @@ namespace PatientRegistrationApi.Controllers
         [HttpPost("AddPatientToDoctor")]
         public IActionResult AddPatientToDoctor(int patientId, int doctorId)
         {
-            _patientService.AddPatientToDoctor(patientId, doctorId);
+            _doctorService.AddPatientToDoctor(patientId, doctorId);
             return Ok();
         }
 

@@ -15,8 +15,8 @@ builder.Services.AddDbContext<RegistrationDbContext>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("RegistrationDbContext")));
 
 builder.Services.AddScoped<IRegistrationDbContext, RegistrationDbContext>();
-builder.Services.AddScoped<IEntityService<Patient>, PatientRegistrationService>();
-builder.Services.AddScoped<IEntityService<Doctor>, DoctorRegistrationService>();
+builder.Services.AddScoped<IDoctorService, DoctorRegistrationService>();
+builder.Services.AddScoped<IPatientService, PatientRegistrationService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

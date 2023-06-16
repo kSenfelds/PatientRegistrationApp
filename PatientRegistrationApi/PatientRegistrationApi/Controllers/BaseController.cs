@@ -8,11 +8,11 @@ namespace PatientRegistrationApi.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        protected readonly IEntityService<Doctor> _doctorService;
-        protected readonly IEntityService<Patient> _patientService;
+        protected readonly IDoctorService _doctorService;
+        protected readonly IPatientService _patientService;
 
-        public BaseController(IEntityService<Doctor> doctorService,
-            IEntityService<Patient> patientService)
+        public BaseController(IDoctorService doctorService,
+            IPatientService patientService)
         {
             _doctorService = doctorService;
             _patientService = patientService;

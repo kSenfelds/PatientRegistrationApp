@@ -9,6 +9,6 @@ namespace PatientRegistration.Core.Services
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void AddPatientToDoctor(int patientId, int doctorId);
+        
     }
 }
